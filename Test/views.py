@@ -55,8 +55,8 @@ def snippet_list(request):
         id=data.get('id')
         print id
         collection.remove({"_id":ObjectId(id)})
-        return HttpResponse(status=204)
-    return JsonResponse(status=404)
+        return JsonResponse(status=204)
+   # return JsonResponse(status=404)
 
         # @csrf_exempt
 # def snippet_detail(request,id):
