@@ -50,7 +50,7 @@ def snippet_list(request):
                 return JsonResponse({"ok":1})
               #return JsonResponse(json.dumps(data,default=json_util.default),safe=False,status=201)
          else:
-             data=JSONParser().parse(request)
+             return  JsonResponse({"false":400})
 
     elif request.method =='DELETE':
         data=JSONParser.parse(request)
@@ -58,7 +58,7 @@ def snippet_list(request):
         print id
         collection.remove({"_id":ObjectId(id)})
         return JsonResponse(status=204)
-   # return JsonResponse(status=404)
+    return JsonResponse(status=404)
 
         # @csrf_exempt
 # def snippet_detail(request,id):
