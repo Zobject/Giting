@@ -28,7 +28,7 @@ def snippet_list(request):
     if request.method=='GET':
         for d in  collection.find():
             data=list(collection.find())
-        return JsonResponse(json.dumps(data,default=json_util.default),safe=False)
+            return JsonResponse(json.dumps(data,default=json_util.default),safe=False)
     elif request.method == 'POST':
             data = JSONParser().parse(request)
             #print data
