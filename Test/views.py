@@ -28,7 +28,7 @@ def snippet_list(request):
     if request.method=='GET':
         for d in  collection.find():
             data=list(collection.find())
-            return JsonResponse(json.dumps(data,default=json_util.default),safe=False)
+        return JsonResponse(json.dumps(data,default=json_util.default),safe=False)
     elif request.method == 'POST':
             data = JSONParser().parse(request)
             #print data
@@ -47,8 +47,8 @@ def snippet_list(request):
 
                 print data
                 collection.insert(data)
-            return JsonResponse({"ok":1})
-            # return JsonResponse(json.dumps(data,default=json_util.default),safe=False,status=201)
+                return JsonResponse({"ok":1})
+            #return JsonResponse(json.dumps(data,default=json_util.default),safe=False,status=201)
 
     elif request.method =='DELETE':
         data=JSONParser.parse(request)
@@ -56,8 +56,9 @@ def snippet_list(request):
         print id
         collection.remove({"_id":ObjectId(id)})
         return HttpResponse(status=204)
+    return JsonResponse(status=404)
 
-# @csrf_exempt
+        # @csrf_exempt
 # def snippet_detail(request,id):
 #     """
 #     Retrieve, update or delete a code snippet.
