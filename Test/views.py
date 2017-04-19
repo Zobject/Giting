@@ -58,7 +58,7 @@ def snippet_list(request):
         print id
         collection.remove({"_id":ObjectId(id)})
         return JsonResponse(status=204)
-    return JsonResponse(status=404)
+    return JsonResponse({"none":1},status=404)
 
         # @csrf_exempt
 # def snippet_detail(request,id):
