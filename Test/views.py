@@ -30,8 +30,9 @@ def snippet_list(request):
             data=list(collection.find())
             return JsonResponse(json.dumps(data,default=json_util.default),safe=False)
     elif request.method == 'POST':
-            data = JSONParser().parse(request)
+         data = JSONParser().parse(request)
             #print data
+         if request.is_valid():
             user=data.get("usr")
             photourl=data.get("photourl")
             if photourl==None:
@@ -44,11 +45,12 @@ def snippet_list(request):
                 data = {"usr":user,"photourl":photourl}
                 #abc = data.get("name")
                 #print abc
-
                 print data
                 collection.insert(data)
                 return JsonResponse({"ok":1})
-            #return JsonResponse(json.dumps(data,default=json_util.default),safe=False,status=201)
+              #return JsonResponse(json.dumps(data,default=json_util.default),safe=False,status=201)
+         else:
+             data=JSONParser().parse(request)
 
     elif request.method =='DELETE':
         data=JSONParser.parse(request)
