@@ -51,7 +51,7 @@ def snippet_list(request):
             # return JsonResponse(json.dumps(data,default=json_util.default),safe=False,status=201)
 
     elif request.method =='DELETE':
-        #data=JSONParser.parse(request)
+        data=JSONParser.parse(request)
         id=data.get('id')
         print id
         collection.remove({"_id":ObjectId(id)})
