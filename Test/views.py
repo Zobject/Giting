@@ -26,9 +26,9 @@ def snippet_list(request):
     List all code snippets, or create a new snippet.
     """
     if request.method=='GET':
-        for d in  collection.find():
-            data=list(collection.find())
-            return JsonResponse(json.dumps(data,default=json_util.default),safe=False)
+        # for d in  collection.find():
+        #     data=list(collection.find())
+        return JsonResponse({"ok":1})
     elif request.method == 'POST':
             data = JSONParser().parse(request)
             #print data
@@ -37,8 +37,9 @@ def snippet_list(request):
             if photourl==None:
                 print "none"
                 data=list(collection.find({"usr":user}))
-                print data
-                return JsonResponse(json.dumps(data,default=json_util.default),safe=False,status=201)
+                print json.dumps(data,default=json_util.default)
+                c=json.dumps(data,default=json_util.default)
+                return HttpResponse({json.dumps(data,default=json_util.default)},status=201)
 
             else:
                 data = {"usr":user,"photourl":photourl}
@@ -46,7 +47,7 @@ def snippet_list(request):
                 #print abc
                 print data
                 collection.insert(data)
-                return JsonResponse({"ok":1})
+                return JsonResponse({"ok":1},status=200)
               #return JsonResponse(json.dumps(data,default=json_util.default),safe=False,status=201)
 
 
